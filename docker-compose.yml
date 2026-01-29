@@ -17,9 +17,13 @@ services:
       - NEXTAUTH_SECRET=dev-secret-change-in-production-32chars
       - NEXTAUTH_URL=http://localhost:3000
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - EMAIL_SERVER=smtp://mailpit:1025
+      - EMAIL_FROM=SeatIQ <noreply@seatiq.local>
     depends_on:
       db:
         condition: service_healthy
+      mailpit:
+        condition: service_started
     stdin_open: true
     tty: true
 
@@ -38,6 +42,15 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"  # Web UI
+      - "1025:1025"  # SMTP
+    environment:
+      - MP_SMTP_AUTH_ACCEPT_ANY=true
+      - MP_SMTP_AUTH_ALLOW_INSECURE=true
 
 volumes:
   node_modules:

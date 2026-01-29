@@ -3,25 +3,12 @@ import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./prisma";
 
-// Always use console logging for magic links (no email server configured for development)
-const sendVerificationRequest = async ({ identifier, url }: { identifier: string; url: string }) => {
-  console.log("\n");
-  console.log("========================================");
-  console.log("MAGIC LINK LOGIN");
-  console.log("========================================");
-  console.log(`Email: ${identifier}`);
-  console.log(`URL: ${url}`);
-  console.log("========================================");
-  console.log("\n");
-};
-
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as NextAuthOptions["adapter"],
   providers: [
     EmailProvider({
       server: process.env.EMAIL_SERVER || "smtp://localhost:1025",
-      from: process.env.EMAIL_FROM || "noreply@seatiq.app",
-      sendVerificationRequest,
+      from: process.env.EMAIL_FROM || "SeatIQ <noreply@seatiq.app>",
     }),
   ],
   session: {
