@@ -1,0 +1,42 @@
+{
+  "name": "@seatiq/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint && eslint src --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf .next node_modules"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.9.0",
+    "@seatiq/engine": "workspace:*",
+    "@seatiq/shared": "workspace:*",
+    "next": "14.1.0",
+    "next-auth": "^4.24.0",
+    "openai": "^4.28.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.1.0",
+    "eslint-config-prettier": "^9.1.0",
+    "postcss": "^8.4.35",
+    "prisma": "^5.9.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.0",
+    "vitest": "^1.2.0"
+  }
+}
